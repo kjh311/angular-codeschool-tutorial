@@ -13,26 +13,26 @@ var stylus        = require('gulp-stylus');
 
 
 gulp.task('sass', function(){
-    sass('scss/styles.scss')
+    sass('stylesheets/scss/*.scss')
         .on('error', sass.logError)
         .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(gulp.dest('css'))
+        .pipe(gulp.dest('stylesheets/css'))
         // injects changes into browser when change of scss:
         .pipe(browserSync.stream({match: '**/*.css'}));
 });
 
 gulp.task('stylus', function(){
-    return gulp.src('stylus/stylus.styl')
+    return gulp.src('stylesheets/stylus/stylus.styl')
         .pipe(stylus())
         .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(gulp.dest('css'))
+        .pipe(gulp.dest('stylesheets/css'))
         // injects changes into browser when change of stylus:
         .pipe(browserSync.stream({match: '**/*.css'}));
 });
 
 gulp.task('watch', function(){
-  gulp.watch('scss/styles.scss', ['sass']);
-  gulp.watch('stylus/stylus.styl', ['stylus']);
+  gulp.watch('stylesheets/scss/styles.scss', ['sass']);
+  // gulp.watch('stylesheets/stylus/stylus.styl', ['stylus']);
   // reloads browser
   gulp.watch("*.html").on("change", reload);
 });
